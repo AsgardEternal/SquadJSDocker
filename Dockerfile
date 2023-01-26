@@ -23,7 +23,8 @@ apt-get update
     apt-get install -y --no-install-suggests --no-install-recommends \
     yarn \
     nodejs \
-    git=1:2.30.2-1
+    git=1:2.30.2-1 \
+    sqlite3=3.34.1-3
 
 su "${USER}" - <<- __EOC__
     (
