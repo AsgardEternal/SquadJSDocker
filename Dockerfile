@@ -44,4 +44,5 @@ FROM setup as prod
 
 USER "${USER}"
 WORKDIR "${USER_HOME}/SquadJS"
-ENTRYPOINT ["/usr/bin/node", "./index.js"]
+COPY ./scripts/entry.sh .
+ENTRYPOINT ["/bin/sh", "entry.sh"]
