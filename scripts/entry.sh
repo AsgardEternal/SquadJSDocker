@@ -2,5 +2,5 @@
 
 printf "Starting SquadJS...\n"
 sleep 10
-/usr/bin/node ./index.js
+/usr/bin/node --unhandled-rejections=strict ./index.js
 
