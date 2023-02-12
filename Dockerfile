@@ -4,7 +4,7 @@
 
 FROM debian:bullseye-slim AS setup
 
-ARG squadjs_version="3.6.1"
+ARG squadjs_version="3.7.0"
 
 ENV USER="squadjs"
 ENV USER_HOME="/home/${USER}"
