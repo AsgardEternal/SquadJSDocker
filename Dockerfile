@@ -45,4 +45,5 @@ FROM setup as prod
 USER "${USER}"
 WORKDIR "${USER_HOME}/SquadJS"
 COPY ./scripts/entry.sh .
+COPY ./squadjsPlugins/*.js "${USER_HOME}/SquadJS/squad-server/plugins/"
 ENTRYPOINT ["/bin/sh", "entry.sh"]
