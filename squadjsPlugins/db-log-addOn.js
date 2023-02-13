@@ -106,8 +106,8 @@ export default class DBLogPlayerTime extends DBLog {
                 );
         }
         
-        if(seeding === true && info.a2sPlayerCount >= this.options.seedingThreshold) this.seeding = false;
-        else if(seeding === false && info.a2sPlayerCount-20 < this.options.seedingThreshold) this.seeding = true;
+        if(this.seeding === true && info.a2sPlayerCount >= this.options.seedingThreshold) this.seeding = false;
+        else if(this.seeding === false && info.a2sPlayerCount-20 < this.options.seedingThreshold) this.seeding = true;
   }
 
   async onPlayerConnected(info) {
