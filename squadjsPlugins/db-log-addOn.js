@@ -99,7 +99,7 @@ export default class DBLogPlayerTime extends DBLog {
   async onUpdatedA2SInformation(info) {
     await super.onUpdatedA2SInformation(info);
 
-        if(info.a2sPlayerCount >= this.options.seedingThreshold && seeding === true) {
+        if(info.a2sPlayerCount >= this.options.seedingThreshold && this.seeding === true) {
                 await this.models.PlayerTime.update(
                         { seedTime: info.time },
                         { where: { seedTime: null, joinedSeeding: 1, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
