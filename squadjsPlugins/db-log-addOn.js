@@ -39,9 +39,6 @@ export default class DBLogPlayerTime extends DBLog {
                                 primaryKey: true,
                                 autoIncrement: true
                         },
-                        playerName: {
-                                type: DataTypes.STRING
-                        },
                         joinTime: {
                                 type: DataTypes.DATE
                         },
@@ -115,7 +112,6 @@ export default class DBLogPlayerTime extends DBLog {
         await this.models.PlayerTime.create({
                 server: this.options.overrideServerID || this.server.id,
                 player: info.player.steamID,
-                playerName: info.player.name,
                 joinTime: info.time,
                 joinedSeeding: this.seeding
         });
