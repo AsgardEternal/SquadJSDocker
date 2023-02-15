@@ -112,15 +112,10 @@ export default class DBLogPlayerTime extends DBLog {
 
   async onPlayerConnected(info) {
         if(info.player){
-                await this.models.SteamUser.upsert({
-                        steamID: info.player.steamID,
-                        lastName: info.player.name
-                });
-
         await this.models.PlayerTime.create({
                 server: this.options.overrideServerID || this.server.id,
-                player: info.player ? info.player.steamID : null,
-                playerName: info.player ? info.player.name : null,
+                player: info.player.steamID,
+                playerName: info.player.name,
                 joinTime: info.time,
                 joinedSeeding: this.seeding
         });
