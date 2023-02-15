@@ -111,7 +111,7 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async onPlayerConnected(info) {
-    this.console.log(info);
+    console.log(info);
         if(info.player){
         await this.models.PlayerTime.create({
                 server: this.options.overrideServerID || this.server.id,
@@ -124,7 +124,7 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async onPlayerDisconnected(info) {
-    this.console.log(info);
+    console.log(info);
         if(info.player){
           await this.models.PlayerTime.update(
                 { leaveTime: info.time },
