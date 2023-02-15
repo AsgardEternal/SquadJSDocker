@@ -28,7 +28,7 @@ apt-get update
 
 su "${USER}" - <<- __EOC__
     (
-        git clone --depth 1 --branch "v${squadjs_version}" https://github.com/Team-Silver-Sphere/SquadJS.git "${USER_HOME}/SquadJS"
+        git clone --depth 1 https://github.com/AsgardEternal/SquadJS.git "${USER_HOME}/SquadJS"
         cd "${USER_HOME}/SquadJS" || exit 1
         yarn install
         yarn cache clean
