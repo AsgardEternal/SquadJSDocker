@@ -106,6 +106,7 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async onPlayerConnected(info) {
+    console.log(info);
         if(info.player){
           await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
@@ -121,6 +122,7 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async onPlayerDisconnected(info) {
+    console.log(info);
         if(info.player){
           await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
