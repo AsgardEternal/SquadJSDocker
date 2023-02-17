@@ -95,7 +95,6 @@ export default class DBLogPlayerTime extends DBLog {
 
   async onUpdatedA2SInformation(info) {
     await super.onUpdatedA2SInformation(info);
-    console.log(info);
         
         if((this.seeding == true) && (info.a2sPlayerCount >= this.options.seedingThreshold)){
           console.log('switching to Live');
