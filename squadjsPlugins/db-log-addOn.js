@@ -81,7 +81,6 @@ export default class DBLogPlayerTime extends DBLog {
     await super.mount();
         this.server.on('PLAYER_CONNECTED', this.onPlayerConnected);
         this.server.on('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
-        this.server.on('PLAYER_KICKED', this.onPlayerDisconnected);
   }
 
   async unmount() {
@@ -92,7 +91,6 @@ export default class DBLogPlayerTime extends DBLog {
     await super.unmount();
         this.server.removeEventListener('PLAYER_CONNECTED', this.onPlayerConnected);
         this.server.removeEventListener('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
-        this.server.removeEventListener('PLAYER_KICKED', this.onPlayerDisconnected);
   }
 
   async onUpdatedA2SInformation(info) {
