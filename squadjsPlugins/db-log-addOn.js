@@ -102,11 +102,8 @@ export default class DBLogPlayerTime extends DBLog {
         if((this.seeding == true) && (info.a2sPlayerCount >= 1)){
           console.log('switching to Live');
           this.seeding = false;
-          let curDateTime = new Date();
-          let timeNow = curDateTime.getFullYear() + '-' + (curDateTime.getMonth() + 1) + '-' + curDateTime.getDate()+' '+curDateTime.getHours()+':'+curDateTime.getMinutes()+':'+curDateTime.getSeconds();
-          console.log(timeNow);
           await this.models.PlayerTime.update(
-                        { seedTime: timeNow },
+                        { seedTime: new Date() },
                         { where: { seedTime: null, joinedSeeding: 1, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
           );
         }else if(this.seeding == false && (info.a2sPlayerCount) < 1){
