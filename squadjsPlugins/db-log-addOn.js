@@ -118,14 +118,13 @@ export default class DBLogPlayerTime extends DBLog {
           await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
         lastName: info.player.name
-      });
+      });}
         await this.models.PlayerTime.create({
                 server: this.options.overrideServerID || this.server.id,
-                player: info.player.steamID,
+                player: info.steamID,
                 joinTime: info.time,
                 joinedSeeding: this.seeding
         });
-        }
   }
 
   async onPlayerDisconnected(info) {
@@ -134,11 +133,10 @@ export default class DBLogPlayerTime extends DBLog {
           await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
         lastName: info.player.name
-      });
+      });}
           await this.models.PlayerTime.update(
                 { leaveTime: info.time },
-                { where: { player: info.player.steamID, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
+                { where: { player: info.steamID, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
           );
-        }
   }
 }
