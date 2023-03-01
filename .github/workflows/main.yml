@@ -33,5 +33,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        cache-to: type=inline
         tags: "${{ vars.DOCKER_REGISTRY_URL }}/squadjs:latest"
