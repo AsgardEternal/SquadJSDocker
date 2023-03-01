@@ -74,42 +74,65 @@ export default class DBLogPlayerTime extends DBLog {
 
   async prepareToMount() {
     await super.prepareToMount();
-        await this.models.PlayerTime.sync();
+    await this.models.PlayerTime.sync();
+    
   }
 
   async mount() {
     await super.mount();
-        this.server.on('PLAYER_CONNECTED', this.onPlayerConnected);
-        this.server.on('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
+    this.server.on('PLAYER_CONNECTED', this.onPlayerConnected);
+    this.server.on('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
+  }
+  
+  async repairDB() {
+    await super.repairDB();
+    let lastTickTime = this.models.TickRate.findOne(
+      { where: { server: this.options.overrideServerID || this.server.id},
+      order: [['id', 'DESC']]}
+    );
+    let lastServerTime = lastTickTime.time;
+    let playerOnlineID = [];
+    for (player of this.players){
+      playerOnlineID.push(player.steamID);
+    }
+    const {not} = Sequelize.Op;
+    this.models.PlayerTime.update(
+      { leaveTime: lastServerTime },
+      { where: { 
+        leaveTime: null, 
+        server: this.options.overrideServerID || this.server.id, 
+        [not]: [{player: playerOnlineID}]
+      } }
+    );
   }
 
   async unmount() {
-        this.models.PlayerTime.update(
-                { leaveTime: 0 },
-                { where: { leaveTime: null , server: this.options.overrideServerID || this.server.id } }
-        );
+    this.models.PlayerTime.update(
+      { leaveTime: 0 },
+      { where: { leaveTime: null , server: this.options.overrideServerID || this.server.id } }
+    );
     await super.unmount();
-        this.server.removeEventListener('PLAYER_CONNECTED', this.onPlayerConnected);
-        this.server.removeEventListener('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
+    this.server.removeEventListener('PLAYER_CONNECTED', this.onPlayerConnected);
+    this.server.removeEventListener('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
   }
 
   async onUpdatedA2SInformation(info) {
     await super.onUpdatedA2SInformation(info);
         
-        if((this.seeding == true) && (info.a2sPlayerCount >= this.options.seedingThreshold)){
-          console.log('switching to Live');
-          this.seeding = false;
-          let curDateTime = new Date();
-          let timeNow = curDateTime.getFullYear() + '-' + (curDateTime.getMonth() + 1) + '-' + curDateTime.getDate()+' '+curDateTime.getHours()+':'+curDateTime.getMinutes()+':'+curDateTime.getSeconds();
-          console.log(timeNow);
-          await this.models.PlayerTime.update(
-                        { seedTime: timeNow },
-                        { where: { seedTime: null, joinedSeeding: 1, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
-          );
-        }else if(this.seeding == false && (info.a2sPlayerCount-20) < this.options.seedingThreshold){
-          console.log('switching to seeding');
-          this.seeding = true;
-        }
+    if((this.seeding == true) && (info.a2sPlayerCount >= this.options.seedingThreshold)){
+      console.log('switching to Live');
+      this.seeding = false;
+      let curDateTime = new Date();
+      let timeNow = curDateTime.getFullYear() + '-' + (curDateTime.getMonth() + 1) + '-' + curDateTime.getDate()+' '+curDateTime.getHours()+':'+curDateTime.getMinutes()+':'+curDateTime.getSeconds();
+      console.log(timeNow);
+      await this.models.PlayerTime.update(
+        { seedTime: timeNow },
+        { where: { seedTime: null, joinedSeeding: 1, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
+      );
+      }else if(this.seeding == false && (info.a2sPlayerCount-20) < this.options.seedingThreshold){
+        console.log('switching to seeding');
+        this.seeding = true;
+      }
   }
 
   async onPlayerConnected(info) {
