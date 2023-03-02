@@ -94,9 +94,7 @@ export default class DBLogPlayerTime extends DBLog {
     );
     let lastServerTime = lastTickTime.time;
     let playerOnlineID = [];
-    console.log(this);
-    let players = await this.server.rcon.getListPlayers();
-    for (player of players){
+    for (player of this.server.players){
       playerOnlineID.push(player.steamID);
     }
     const {not} = Sequelize.Op;
@@ -122,22 +120,6 @@ export default class DBLogPlayerTime extends DBLog {
 
   async onUpdatedA2SInformation(info) {
     await super.onUpdatedA2SInformation(info);
-    
-    if(this.repairSessions == true){
-      let playerOnlineID = [];
-      for (player of this.server){
-        playerOnlineID.push(player.steamID);
-      }
-      const {not} = Sequelize.Op;
-      this.models.PlayerTime.update(
-        { leaveTime: lastServerTime },
-        { where: { 
-          leaveTime: null, 
-          server: this.options.overrideServerID || this.server.id, 
-          [not]: [{player: playerOnlineID}]
-        } }
-      );
-    }
         
     if((this.seeding == true) && (info.a2sPlayerCount >= this.options.seedingThreshold)){
       console.log('switching to Live');
