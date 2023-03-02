@@ -92,8 +92,8 @@ export default class DBLogPlayerTime extends DBLog {
     );
     let lastServerTime = lastTickTime.time;
     let playerOnlineID = [];
-    console.log(this.players);
-    for (player of this.players){
+    let players = await this.rcon.getListPlayers();
+    for (player of players){
       playerOnlineID.push(player.steamID);
     }
     const {not} = Sequelize.Op;
