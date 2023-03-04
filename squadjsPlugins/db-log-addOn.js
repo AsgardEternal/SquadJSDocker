@@ -101,6 +101,7 @@ export default class DBLogPlayerTime extends DBLog {
     let lastServerTime = lastTickTime.time;
     console.log('last time found:', lastServerTime);
     let playerOnlineID = [];
+    playerOnlineID.push(0);
     for (player of this.server.players){
       playerOnlineID.push(player.steamID);
     }
