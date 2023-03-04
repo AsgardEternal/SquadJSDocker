@@ -105,13 +105,12 @@ export default class DBLogPlayerTime extends DBLog {
       playerOnlineID.push(player.steamID);
     }
     console.log('players online:', playerOnlineID);
-    const Op = require('sequelize').Op;
     let rowUpdate = await this.models.PlayerTime.update(
       { leaveTime: lastServerTime },
       { where: { 
         leaveTime: null, 
         server: this.options.overrideServerID || this.server.id, 
-        [Op.ne]: { player: playerOnlineID }
+        $not: { player: playerOnlineID }
       } },
       { logging: console.log }
     );
