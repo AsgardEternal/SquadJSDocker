@@ -112,7 +112,7 @@ export default class DBLogPlayerTime extends DBLog {
         leaveTime: null, 
         server: this.options.overrideServerID || this.server.id, 
         [Op.ne]: { player: playerOnlineID }
-      } }
+      } },
       { logging: console.log }
     );
     console.log('updated playerTimes row count: %i', rowUpdate[0]);
