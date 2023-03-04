@@ -81,24 +81,31 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async mount() {
+    console.log('Mounting db-log');
     await super.mount();
+    console.log('finished mounting db-log');
     this.server.on('PLAYER_CONNECTED', this.onPlayerConnected);
     this.server.on('PLAYER_DISCONNECTED', this.onPlayerDisconnected);
+    console.log('finished mounting db-log-addOn');
   }
   
   async repairDB() {
+    console.log('starting DB repair');
     await super.repairDB();
-    let lastTickTime = this.models.TickRate.findOne(
+    console.log('starting DB repair for addOn');
+    let lastTickTime = await this.models.TickRate.findOne(
       { where: { server: this.options.overrideServerID || this.server.id},
       order: [['id', 'DESC']]}
     );
+    console.log('last tick found:', lastTickTime);
     let lastServerTime = lastTickTime.time;
     let playerOnlineID = [];
     for (player of this.server.players){
       playerOnlineID.push(player.steamID);
     }
+    console.log('players online:', playerOnlineID);
     const {not} = Sequelize.Op;
-    this.models.PlayerTime.update(
+    let rowUpdate = await this.models.PlayerTime.update(
       { leaveTime: lastServerTime },
       { where: { 
         leaveTime: null, 
@@ -106,6 +113,8 @@ export default class DBLogPlayerTime extends DBLog {
         [not]: [{player: playerOnlineID}]
       } }
     );
+    console.log('updated playerTimes row count: %i', rowUpdate[0]);
+    console.log('finish DB repair');
   }
 
   async unmount() {
