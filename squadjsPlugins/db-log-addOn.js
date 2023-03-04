@@ -139,30 +139,33 @@ export default class DBLogPlayerTime extends DBLog {
 
   async onPlayerConnected(info) {
     console.log(info);
-        if(info.player){
-          await this.models.SteamUser.upsert({
+    if(info.player){
+      await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
         lastName: info.player.name
       });
-        await this.models.PlayerTime.create({
-                server: this.options.overrideServerID || this.server.id,
-                player: info.steamID,
-                joinTime: info.time,
-                joinedSeeding: this.seeding
-        });}
-    else console.log('player is null');
+      await this.models.PlayerTime.create({
+        server: this.options.overrideServerID || this.server.id,
+        player: info.steamID,
+        joinTime: info.time,
+        joinedSeeding: this.seeding
+      });
+      console.log('player connect complete');
+    } else console.log('player is null');
   }
 
   async onPlayerDisconnected(info) {
     console.log(info);
-        if(info.player){
-          await this.models.SteamUser.upsert({
+    if(info.player){
+      await this.models.SteamUser.upsert({
         steamID: info.player.steamID,
         lastName: info.player.name
-      });}
-          await this.models.PlayerTime.update(
-                { leaveTime: info.time },
-                { where: { player: info.steamID, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
-          );
+      });
+    }
+    let rowAffect = await this.models.PlayerTime.update(
+      { leaveTime: info.time },
+      { where: { player: info.steamID, leaveTime: null, server: this.options.overrideServerID || this.server.id } }
+    );
+    console.log('player disconnect rows update: %i', rowAffect[0]);
   }
 }
