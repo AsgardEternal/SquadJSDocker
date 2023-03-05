@@ -167,6 +167,7 @@ export default class DBLogPlayerTime extends DBLog {
   }
 
   async onPlayerDisconnected(info) {
+    await sleep (500);
     console.log(info);
     if(info.player){
       await this.models.SteamUser.upsert({
