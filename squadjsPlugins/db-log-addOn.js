@@ -116,7 +116,7 @@ export default class DBLogPlayerTime extends DBLog {
 //       } },
 //       { logging: console.log }
 //     );
-    console.log('updated playerTimes row count: %i', rowUpdate[0]);
+//     console.log('updated playerTimes row count: %i', rowUpdate[0]);
     console.log('finish DB repair');
   }
 
