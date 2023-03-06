@@ -102,21 +102,21 @@ export default class DBLogPlayerTime extends DBLog {
     console.log('last time found:', lastServerTime);
     let playerOnlineID = [];
     playerOnlineID.push(0);
-//     for (const player of this.server.players){
-//       playerOnlineID.push(player.steamID);
-//     }
+    for (const player of this.server.players){
+      playerOnlineID.push(player.steamID);
+    }
     console.log('players online:', playerOnlineID);
-    const {ne} = Sequelize.Op;
-//     let rowUpdate = await this.models.PlayerTime.update(
-//       { leaveTime: lastServerTime },
-//       { where: { 
-//         leaveTime: null, 
-//         server: this.options.overrideServerID || this.server.id, 
-//         player: { [ne]: playerOnlineID }
-//       } },
-//       { logging: console.log }
-//     );
-//     console.log('updated playerTimes row count: %i', rowUpdate[0]);
+//     const {ne, not, in} = Sequelize.Op;
+    let rowUpdate = await this.models.PlayerTime.update(
+      { leaveTime: lastServerTime },
+      { where: { 
+        leaveTime: {[Op.not]: null}, 
+        server: this.options.overrideServerID || this.server.id, 
+        player: { [Op.ne]: {[Op.in]: playerOnlineID} }
+      } },
+      { logging: console.log }
+    );
+    console.log('updated playerTimes row count: %i', rowUpdate[0]);
     console.log('finish DB repair');
   }
 
