@@ -111,7 +111,7 @@ export default class DBLogPlayerTime extends DBLog {
     let rowUpdate = await this.models.PlayerTime.update(
       { leaveTime: lastServerTime },
       { where: { 
-        leaveTime: {[Op.not]: null}, 
+        leaveTime: {[Op.is]: null}, 
         server: this.options.overrideServerID || this.server.id, 
         player: { [Op.ne]: {[Op.in]: playerOnlineID} }
       } },
