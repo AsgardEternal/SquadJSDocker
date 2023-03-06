@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import Op from 'sequalize';
 
 import DBLog from './db-log.js';
 
