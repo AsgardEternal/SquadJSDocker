@@ -98,7 +98,7 @@ export default class DBLogPlayerTime extends DBLog {
       order: [['id', 'DESC']]}
     );
     console.log('last tick found:', lastTickTime);
-    let lastServerTime = lastTickTime.time;
+    let lastServerTime = String(lastTickTime.time);
     console.log('last time found:', lastServerTime);
     let playerOnlineID = [];
     playerOnlineID.push(0);
@@ -108,10 +108,10 @@ export default class DBLogPlayerTime extends DBLog {
     console.log('players online:', playerOnlineID);
     const {ne, not, notIn, is} = Sequelize.Op;
     let rowUpdate = await this.models.PlayerTime.update(
-      { leaveTime: lastServerTime },
+      { leaveTime: (lastServerTime) },
       { where: { 
         leaveTime: {[is]: null}, 
-        server: this.options.overrideServerID || this.server.id, 
+        server: (this.options.overrideServerID || this.server.id), 
         player: {[notIn]: playerOnlineID}
       },
       logging: console.log
