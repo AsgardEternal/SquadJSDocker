@@ -113,8 +113,9 @@ export default class DBLogPlayerTime extends DBLog {
         leaveTime: {[is]: null}, 
         server: this.options.overrideServerID || this.server.id, 
         player: {[notIn]: playerOnlineID}
-      } },
-      { logging: console.log }
+      },
+      logging: console.log
+      }
     );
     console.log('updated playerTimes row count: %i', rowUpdate[0]);
     console.log('finish DB repair');
