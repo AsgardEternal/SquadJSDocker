@@ -54,8 +54,7 @@ export default class DBLogPlayerTime extends DBLog {
                     type: DataTypes.INTEGER
                 },
                 session: {
-                    type: DataTypes.INTEGER,
-                    autoIncrement: true
+                    type: DataTypes.INTEGER
                 }
             },
             {
