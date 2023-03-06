@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 17 * * *'
+    - cron: '45 18 * * *'
   push:
     branches:
       - Development
@@ -33,6 +33,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        cache-from: type=registry,ref=${{ vars.DOCKER_REGISTRY_URL }}/squadjs:latest
-        cache-to: type=inline
         tags: "${{ vars.DOCKER_REGISTRY_URL }}/squadjs:latest"
