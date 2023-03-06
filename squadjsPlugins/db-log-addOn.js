@@ -111,7 +111,7 @@ export default class DBLogPlayerTime extends DBLog {
     console.log('players online:', playerOnlineID);
     const {ne, not, notIn, is} = Sequelize.Op;
     let rowUpdate = await this.models.PlayerTime.update(
-      { leaveTime: (lastServerTime) },
+      { leaveTime: lastServerTime },
       { where: { 
         leaveTime: {[is]: null}, 
         server: this.options.overrideServerID || this.server.id, 
