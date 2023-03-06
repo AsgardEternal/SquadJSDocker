@@ -112,7 +112,7 @@ export default class DBLogPlayerTime extends DBLog {
       { where: { 
         leaveTime: {[is]: null}, 
         server: this.options.overrideServerID || this.server.id, 
-        player: { [ne]: {[opIn]: playerOnlineID} }
+        player: { [not]: {[opIn]: playerOnlineID} }
       } },
       { logging: console.log }
     );
