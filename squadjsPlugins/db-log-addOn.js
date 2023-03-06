@@ -93,12 +93,15 @@ export default class DBLogPlayerTime extends DBLog {
     console.log('starting DB repair');
     await super.repairDB();
     console.log('starting DB repair for addOn');
-    let lastTickTime = await this.models.TickRate.findOne(
-      { where: { server: this.options.overrideServerID || this.server.id},
-      order: [['id', 'DESC']]}
+    let lastTickTime = await this.models.TickRate.findOne({
+      where: { server: this.options.overrideServerID || this.server.id},
+      order: [['id', 'DESC']],
+      logging: console.log
+      }
     );
     console.log('last tick found:', lastTickTime);
-    let lastServerTime = String(lastTickTime.time);
+    let lastServerDate = lastTickTime.time;
+    let lastServerTime = lastServerDate.getFullYear() + '-' + (lastServerDate.getMonth() + 1) + '-' + lastServerDate.getDate()+' '+lastServerDate.getHours()+':'+lastServerDate.getMinutes()+':'+lastServerDate.getSeconds();
     console.log('last time found:', lastServerTime);
     let playerOnlineID = [];
     playerOnlineID.push(0);
@@ -111,7 +114,7 @@ export default class DBLogPlayerTime extends DBLog {
       { leaveTime: (lastServerTime) },
       { where: { 
         leaveTime: {[is]: null}, 
-        server: (this.options.overrideServerID || this.server.id), 
+        server: this.options.overrideServerID || this.server.id, 
         player: {[notIn]: playerOnlineID}
       },
       logging: console.log
