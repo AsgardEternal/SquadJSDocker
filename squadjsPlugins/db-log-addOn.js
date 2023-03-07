@@ -219,7 +219,7 @@ export default class DBLogPlayerTime extends DBLog {
     }
 
     async onPlayerDisconnected(info) {
-        await sleep(500);
+        await new Promise(r => setTimeout(r, 500));
         console.log(info);
         if (info.player) {
             await this.models.SteamUser.upsert({
