@@ -85,6 +85,13 @@ export default class DBLogPlayerTime extends DBLog {
 
     async mount() {
         console.log('Mounting db-log');
+        if(this.server.currentLayer.gamemode === "Seed"){
+            console.log('switching to seeding');
+            this.seeding = ServerState.seeding;
+        } else {
+            console.log('switching to Live');
+            this.seeding = ServerState.live;
+        }
         await super.mount();
         console.log('finished mounting db-log');
         this.server.on('PLAYER_CONNECTED', this.onPlayerConnected);
@@ -150,6 +157,7 @@ export default class DBLogPlayerTime extends DBLog {
     }
 
     async updateCurrentTimeState(date, oldState, newState){
+        if(oldState === newState) return;
         const timeNow = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         console.log(timeNow);
         const curPlayer = await this.models.PlayerTimeNew.findAll({
