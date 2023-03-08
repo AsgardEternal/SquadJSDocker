@@ -191,20 +191,28 @@ export default class DBLogPlayerTime extends DBLog {
     async onUpdatedA2SInformation(info) {
         await super.onUpdatedA2SInformation(info);
 
-        const curDateTime = new Date();
-        if ((this.seeding !== ServerState.live) && (info.a2sPlayerCount >= this.options.seedingThreshold)) {
-            console.log('switching to Live');
-            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
-        } else if (this.seeding === false && (info.a2sPlayerCount - 20) < this.options.seedingThreshold) {
-            console.log('switching to seeding');
-            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
-        }
+//         const curDateTime = new Date();
+//         if ((this.seeding !== ServerState.live) && (info.a2sPlayerCount >= this.options.seedingThreshold)) {
+//             console.log('switching to Live');
+//             await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
+//         } else if (this.seeding === false && (info.a2sPlayerCount - 20) < this.options.seedingThreshold) {
+//             console.log('switching to seeding');
+//             await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
+//         }
     }
     
     async onNewGame(info){
         await super.onNewGame(info);
         
         console.log(info);
+        const curDateTime = info.time;
+        if(info.layer.gamemode === 'Seed'){
+            console.log('switching to seeding');
+            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
+        } else {
+            console.log('switching to Live');
+            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
+        }
     }
 
     async onPlayerConnected(info) {
