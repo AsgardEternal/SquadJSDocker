@@ -145,7 +145,6 @@ export default class DBLogPlayerTime extends DBLog {
 
         console.log('updated playerTimes row count: %i', rowUpdate[0]);
         console.log('finish DB repair');
-        this.seeding = ServerState.live;
     }
 
     async unmount() {
