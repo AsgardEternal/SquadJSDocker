@@ -200,6 +200,12 @@ export default class DBLogPlayerTime extends DBLog {
             await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
         }
     }
+    
+    async onNewGame(info){
+        await super.onNewGame(info);
+        
+        console.log(info);
+    }
 
     async onPlayerConnected(info) {
         console.log(info);
