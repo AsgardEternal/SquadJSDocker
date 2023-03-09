@@ -87,12 +87,14 @@ export default class DBLogPlayerTime extends DBLog {
 
     async mount() {
         console.log('Mounting db-log');
-        if(this.server.currentLayer.gamemode === "Seed"){
-            console.log('switching to seeding');
-            this.seeding = ServerState.seeding;
-        } else {
-            console.log('switching to Live');
-            this.seeding = ServerState.live;
+        if(this.server.currentLayer){
+            if(this.server.currentLayer.gamemode === "Seed"){
+                console.log('switching to seeding');
+                this.seeding = ServerState.seeding;
+            } else {
+                console.log('switching to Live');
+                this.seeding = ServerState.live;
+            }
         }
         await super.mount();
         console.log('finished mounting db-log');
