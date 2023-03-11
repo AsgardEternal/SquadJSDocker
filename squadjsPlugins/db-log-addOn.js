@@ -165,7 +165,7 @@ export default class DBLogPlayerTime extends DBLog {
         console.log(timeNow);
         const curPlayer = await this.models.PlayerTimeNew.findAll({
             where: {
-                leaveTime: null,
+                endTime: null,
                 serverState: oldState,
                 server: this.options.overrideServerID || this.server.id
             }
