@@ -217,12 +217,14 @@ export default class DBLogPlayerTime extends DBLog {
         
         console.log(info);
         const curDateTime = info.time;
-        if(info.layer.gamemode === 'Seed'){
-            console.log('switching to seeding');
-            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
-        } else {
-            console.log('switching to Live');
-            await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
+        if(info.layer){
+            if(info.layer.gamemode === 'Seed'){
+                console.log('switching to seeding');
+                await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
+            } else {
+                console.log('switching to Live');
+                await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
+            }
         }
     }
 
