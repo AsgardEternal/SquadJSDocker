@@ -170,6 +170,7 @@ export default class DBLogPlayerTime extends DBLog {
                 server: this.options.overrideServerID || this.server.id
             }
         });
+        console.log(curPlayer);
         await this.models.PlayerTimeNew.update(
             { endTime: timeNow },
             {
