@@ -171,6 +171,17 @@ export default class DBLogPlayerTime extends DBLog {
             }
         });
         console.log(curPlayer);
+        let curplayerarr = [];
+        for (const oneplayer in curPlayer){
+            curplayerarr.push({
+                startTime: timeNow,
+                endTime: null,
+                serverState: newState,
+                session: oneplayer.session,
+                server: oneplayer.server,
+                player: oneplayer.player
+            });
+        }
         await this.models.PlayerTimeNew.update(
             { endTime: timeNow },
             {
@@ -181,22 +192,9 @@ export default class DBLogPlayerTime extends DBLog {
                 }
             }
         );
-        await this.models.PlayerTimeNew.bulkCreate(curPlayer,{
+        await this.models.PlayerTimeNew.bulkCreate(curplayerarr,{
             fields: ['startTime', 'endTime','serverState','session','server','player']
         });
-        await this.models.PlayerTimeNew.update(
-            {
-                serverState: newState,
-                startTime: timeNow
-            },
-            {
-                where: {
-                    endTime: null,
-                    serverState: oldState,
-                    server: this.options.overrideServerID || this.server.id
-                }
-            }
-        );
         this.seeding = newState;
     }
 
