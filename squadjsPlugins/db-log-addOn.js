@@ -182,6 +182,7 @@ export default class DBLogPlayerTime extends DBLog {
                 player: oneplayer.player
             });
         }
+        console.log(curplayerarr);
         await this.models.PlayerTimeNew.update(
             { endTime: timeNow },
             {
