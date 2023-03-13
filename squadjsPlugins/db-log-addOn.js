@@ -172,7 +172,8 @@ export default class DBLogPlayerTime extends DBLog {
         });
         console.log(curPlayer);
         let curplayerarr = [];
-        for (const oneplayer in curPlayer){
+        for (const oneplayer of curPlayer){
+            console.log(oneplayer);
             curplayerarr.push({
                 startTime: timeNow,
                 endTime: null,
