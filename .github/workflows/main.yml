@@ -2,6 +2,11 @@ name: Docker Image CI
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '45 18 * * *'
+  push:
+    branches:
+      - Development
 
 jobs:
 
@@ -28,4 +33,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: "${{ vars.DOCKER_REGISTRY_URL }}/squadjs:testing"
+        tags: "${{ vars.DOCKER_REGISTRY_URL }}/squadjs:latest"
