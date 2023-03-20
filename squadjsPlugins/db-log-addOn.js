@@ -89,12 +89,19 @@ export default class DBLogPlayerTime extends DBLog {
         console.log('Mounting db-log');
         if(this.server.currentLayer){
             if(this.server.currentLayer.gamemode === "Seed"){
-                console.log('switching to seeding');
+                console.log('starting to seeding');
                 this.seeding = ServerState.seeding;
             } else {
-                console.log('switching to Live');
+                console.log('starting to Live');
                 this.seeding = ServerState.live;
             }
+        } else {
+            if(this.currentLayerRcon.level.includes("Seed")){
+                console.log('starting to seeding');
+                this.seeding = ServerState.seeding;
+            } else {
+                console.log('starting to Live');
+                this.seeding = ServerState.live;
         }
         await super.mount();
         console.log('finished mounting db-log');
@@ -220,6 +227,14 @@ export default class DBLogPlayerTime extends DBLog {
         const curDateTime = info.time;
         if(info.layer){
             if(info.layer.gamemode === 'Seed'){
+                console.log('switching to seeding');
+                await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
+            } else {
+                console.log('switching to Live');
+                await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
+            }
+        } else {
+            if(this.currentLayerRcon.level.includes("Seed")){
                 console.log('switching to seeding');
                 await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
             } else {
