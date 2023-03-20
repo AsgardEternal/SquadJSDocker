@@ -102,6 +102,7 @@ export default class DBLogPlayerTime extends DBLog {
             } else {
                 console.log('starting to Live');
                 this.seeding = ServerState.live;
+            }
         }
         await super.mount();
         console.log('finished mounting db-log');
