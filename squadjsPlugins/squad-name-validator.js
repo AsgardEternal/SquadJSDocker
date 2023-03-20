@@ -1,3 +1,5 @@
+//from https://github.com/fantinodavide/squadjs-squad-name-validator
+
 import DiscordBasePlugin from './discord-base-plugin.js';
 
 export default class SquadNameValidator extends DiscordBasePlugin {
