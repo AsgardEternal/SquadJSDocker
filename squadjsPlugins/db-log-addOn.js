@@ -96,7 +96,7 @@ export default class DBLogPlayerTime extends DBLog {
                 this.seeding = ServerState.live;
             }
         } else {
-            if(this.currentLayerRcon.level.includes("Seed")){
+            if(this.server.currentLayerRcon.layer.includes("Seed")){
                 console.log('starting to seeding');
                 this.seeding = ServerState.seeding;
             } else {
@@ -235,7 +235,7 @@ export default class DBLogPlayerTime extends DBLog {
                 await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.live);
             }
         } else {
-            if(this.currentLayerRcon.level.includes("Seed")){
+            if(this.server.currentLayerRcon.layer.includes("Seed")){
                 console.log('switching to seeding');
                 await this.updateCurrentTimeState(curDateTime, this.seeding, ServerState.seeding);
             } else {
