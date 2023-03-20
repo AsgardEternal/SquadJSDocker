@@ -33,8 +33,6 @@ export default class DBLogPlayerTime extends DBLog {
 
     constructor(server, options, connectors) {
         super(server, options, connectors);
-        
-        console.log('WARNING: USING TESTING BRANCH for dblogAddon');
 
         this.seeding = ServerState.init;
 
