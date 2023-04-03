@@ -28,7 +28,7 @@ apt-get update
 
 su "${USER}" - <<- __EOC__
     (
-        git clone --recurse-submodules --depth 1 https://github.com/AsgardEternal/SquadJS.git "${USER_HOME}/SquadJS"
+        git clone --depth 1 https://github.com/AsgardEternal/SquadJS.git "${USER_HOME}/SquadJS"
         cd "${USER_HOME}/SquadJS" || exit 1
         yarn install
         yarn cache clean
