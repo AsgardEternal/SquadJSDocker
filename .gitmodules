@@ -1,0 +1,9 @@
+[submodule "squadjsPlugins/mapVote"]
+	path = squadjsPlugins/mapVote
+	url = https://github.com/fantinodavide/squad-js-map-vote.git
+[submodule "squadjsPlugins/nameVal"]
+	path = squadjsPlugins/nameVal
+	url = https://github.com/fantinodavide/squadjs-squad-name-validator.git
+[submodule "squadjsPlugins/dblogext"]
+	path = squadjsPlugins/dblogext
+	url = https://github.com/AsgardEternal/DBLogExtension.git
