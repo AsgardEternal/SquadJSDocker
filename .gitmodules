@@ -4,3 +4,6 @@
 [submodule "squadjsPlugins/dblogext"]
 	path = squadjsPlugins/dblogext
 	url = https://github.com/AsgardEternal/DBLogExtension.git
+[submodule "squadjsPlugins/mapVote"]
+	path = squadjsPlugins/mapVote
+	url = https://github.com/AsgardEternal/squad-js-map-vote.git
