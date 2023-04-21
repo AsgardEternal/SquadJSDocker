@@ -7,3 +7,4 @@
 [submodule "squadjsPlugins/mapVote"]
 	path = squadjsPlugins/mapVote
 	url = https://github.com/AsgardEternal/squad-js-map-vote.git
+	branch = master
