@@ -8,3 +8,6 @@
 	path = squadjsPlugins/mapVote
 	url = https://github.com/AsgardEternal/squad-js-map-vote.git
 	branch = master
+[submodule "squadjsPlugins/switch"]
+	path = squadjsPlugins/switch
+	url = https://github.com/fantinodavide/squadjs-switch-plugin.git
