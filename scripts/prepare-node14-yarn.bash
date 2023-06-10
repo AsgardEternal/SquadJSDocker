@@ -3,14 +3,14 @@
 # Discussion, issues and change requests at:
 #   https://github.com/nodesource/distributions
 #
-# Script to install the NodeSource Node.js 14.x repo onto a
+# Script to install the NodeSource Node.js 16.x repo onto a
 # Debian or Ubuntu system.
 #
 # Run as root or insert `sudo -E` before `bash`:
 #
-# curl -sL https://deb.nodesource.com/setup_14.x | bash -
+# curl -sL https://deb.nodesource.com/setup_16.x | bash -
 #   or
-# wget -qO- https://deb.nodesource.com/setup_14.x | bash -
+# wget -qO- https://deb.nodesource.com/setup_16.x | bash -
 #
 # CONTRIBUTIONS TO THIS SCRIPT
 #
@@ -21,9 +21,9 @@
 
 
 export DEBIAN_FRONTEND=noninteractive
-SCRSUFFIX="_14.x"
-NODENAME="Node.js 14.x"
-NODEREPO="node_14.x"
+SCRSUFFIX="_16.x"
+NODENAME="Node.js 16.x"
+NODEREPO="node_16.x"
 NODEPKG="nodejs"
 
 print_status() {
@@ -94,7 +94,7 @@ node_deprecation_warning() {
           "X${NODENAME}" == "XNode.js 8.x LTS Carbon" ||
           "X${NODENAME}" == "XNode.js 9.x" ||
           "X${NODENAME}" == "XNode.js 10.x" ||
-          "X${NODENAME}" == "XNode.js 11.x" ||
+          "X${NODENAME}" == "XNode.js 11.x" || 
           "X${NODENAME}" == "XNode.js 12.x" ||
           "X${NODENAME}" == "XNode.js 13.x" ||
           "X${NODENAME}" == "XNode.js 15.x" ||
@@ -110,10 +110,11 @@ ${bold}${NODENAME} is no longer actively supported!${normal}
   Use the installation script that corresponds to the version of Node.js you
   wish to install. e.g.
 
-   * ${green}https://deb.nodesource.com/setup_14.x — Node.js 14 \"Fermium\"${normal}
-   * ${green}https://deb.nodesource.com/setup_16.x — Node.js 16 \"Gallium\"${normal}
-   * ${green}https://deb.nodesource.com/setup_18.x — Node.js 18 LTS \"Hydrogen\"${normal} (recommended)
-   * ${green}https://deb.nodesource.com/setup_19.x — Node.js 19 \"Nineteen\"${normal} (current)
+   * ${green}https://deb.nodesource.com/setup_14.x â€” Node.js 14 \"Fermium\"${normal}
+   * ${green}https://deb.nodesource.com/setup_16.x â€” Node.js 16 \"Gallium\"${normal}
+   * ${green}https://deb.nodesource.com/setup_18.x â€” Node.js 18 LTS \"Hydrogen\"${normal} (recommended)
+   * ${green}https://deb.nodesource.com/setup_19.x â€” Node.js 19 \"Nineteen\"${normal}
+   * ${green}https://deb.nodesource.com/setup_20.x â€” Node.js 20 \"Iron\"${normal} (current)
 
   Please see ${bold}https://github.com/nodejs/Release${normal} for details about which
   version may be appropriate for you.
@@ -140,10 +141,11 @@ This script, located at ${bold}https://deb.nodesource.com/setup${normal}, used t
   You should use the script that corresponds to the version of Node.js you
   wish to install. e.g.
 
-   * ${green}https://deb.nodesource.com/setup_14.x — Node.js 14 \"Fermium\"${normal}
-   * ${green}https://deb.nodesource.com/setup_16.x — Node.js 16 \"Gallium\"${normal}
-   * ${green}https://deb.nodesource.com/setup_18.x — Node.js 18 LTS \"Hydrogen\"${normal} (recommended)
-   * ${green}https://deb.nodesource.com/setup_19.x — Node.js 19 \"Nineteen\"${normal} (current)
+   * ${green}https://deb.nodesource.com/setup_14.x â€” Node.js 14 \"Fermium\"${normal}
+   * ${green}https://deb.nodesource.com/setup_16.x â€” Node.js 16 \"Gallium\"${normal}
+   * ${green}https://deb.nodesource.com/setup_18.x â€” Node.js 18 LTS \"Hydrogen\"${normal} (recommended)
+   * ${green}https://deb.nodesource.com/setup_19.x â€” Node.js 19 \"Nineteen\"${normal}
+   * ${green}https://deb.nodesource.com/setup_20.x â€” Node.js 20 \"Iron\"${normal} (current)
 
   Please see ${bold}https://github.com/nodejs/Release${normal} for details about which
   version may be appropriate for you.
@@ -238,10 +240,12 @@ check_alt "Devuan"         "ascii"           "Debian"        "stretch"
 check_alt "Devuan"         "beowulf"         "Debian"        "buster"
 check_alt "Devuan"         "chimaera"        "Debian"        "bullseye"
 check_alt "Devuan"         "ceres"           "Debian"        "sid"
+check_alt "Devuan"         "daedalus"        "Debian"        "bookworm"
 check_alt "Deepin"         "panda"           "Debian"        "sid"
 check_alt "Deepin"         "unstable"        "Debian"        "sid"
 check_alt "Deepin"         "stable"          "Debian"        "buster"
-check_alt "Deepin"         "apricot"         "Debian"
+check_alt "Deepin"         "apricot"         "Debian"        "buster"
+check_alt "Deepin"         "beige"           "Debian"        "bookworm"
 check_alt "elementaryOS"   "luna"            "Ubuntu"        "precise"
 check_alt "elementaryOS"   "freya"           "Ubuntu"        "trusty"
 check_alt "elementaryOS"   "loki"            "Ubuntu"        "xenial"
@@ -249,6 +253,7 @@ check_alt "elementaryOS"   "juno"            "Ubuntu"        "bionic"
 check_alt "elementaryOS"   "hera"            "Ubuntu"        "bionic"
 check_alt "elementaryOS"   "odin"            "Ubuntu"        "focal"
 check_alt "elementaryOS"   "jolnir"          "Ubuntu"        "focal"
+check_alt "elementaryOS"   "horus"           "Ubuntu"        "jammy"
 check_alt "Kali"           "sana"            "Debian"        "jessie"
 check_alt "Kali"           "kali-rolling"    "Debian"        "bullseye"
 check_alt "Linux Mint"     "maya"            "Ubuntu"        "precise"
@@ -353,12 +358,13 @@ yarn_site='https://dl.yarnpkg.com/debian'
 yarn_key_url="$yarn_site/pubkey.gpg"
 local_yarn_key="$keyring/yarnkey.gpg"
 
-
-exec_cmd "curl -sL $yarn_key_url | gpg --dearmor | tee $local_yarn_key >/dev/null"
-exec_cmd "echo 'deb [signed-by=$local_yarn_key] $yarn_site stable main' | tee /etc/apt/sources.list.d/yarn.list"
-print_status """Run \`${bold}apt-get install -y ${NODEPKG}${normal}\` to install ${NODENAME} and npm
+print_status """Run \`${bold}sudo apt-get install -y ${NODEPKG}${normal}\` to install ${NODENAME} and npm
 ## You may also need development tools to build native addons:
-     apt-get install gcc g++ make
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL $yarn_key_url | gpg --dearmor | sudo tee $local_yarn_key >/dev/null
+     echo \"deb [signed-by=$local_yarn_key] $yarn_site stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
 """
 
 }
