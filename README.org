@@ -1,0 +1,27 @@
+* SquadJS Docker
+  This is a docker image used by Asgard Eternal for
+  [[https://github.com/Team-Silver-Sphere/SquadJS][SquadJS]].
+
+* Credits
+
+  We include some plugins from other authors besides the SquadJS team and ourselves, Asgard Eternal.
+  Asgard Eternal has received explicit permission to use the plugins included in this repository if
+  they do not include a license.
+  We'd like to give credit to the following authors:
+  - [[https://github.com/fantinodavide][fantinodavide]] for the following plugins:
+    - [[https://github.com/fantinodavide/squadjs-switch-plugin.git][SquadJS Squad/Team/etc. Switch]]
+    - [[https://github.com/fantinodavide/squadjs-squad-name-validator.git][SquadJS Squad Name Validator]]
+    - [[https://github.com/fantinodavide/squad-js-map-vote][SquadJS Map Vote]]
+      Asgard Eternal has a fork based on this plugin with additional code for our needs. Still, the
+      core of it is fantinodavide's work.
+  - [[https://github.com/steelskillet][Skillet]]
+    Skillet, at the time of writing, is part of Asgard Eternal. He has extended on forks of certain
+    plugins or entirely overhauled/rewritten plugins that go into this image.
+    - [[https://github.com/AsgardEternal/DBLogExtension.git][SquadJS DBLogExtension]]
+    - [[https://github.com/AsgardEternal/squad-js-map-vote.git][SquadJS Map Vote]]
+      This is a fork with additional functionality Asgard Eternal uses for map voting.
+      This forked off of
+      [[https://github.com/fantinodavide/squad-js-map-vote][fantinodavide's SquadJS Map Vote]].
+      So thanks to him for the plugin and Skillet for extending it for Asgard Eternal.
+
+  Thanks to all authors 🍺!
