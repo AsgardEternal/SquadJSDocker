@@ -11,3 +11,6 @@
 [submodule "squadjsPlugins/switch"]
 	path = squadjsPlugins/switch
 	url = https://github.com/fantinodavide/squadjs-switch-plugin.git
+[submodule "squadjsPlugins/squadBaiting"]
+	path = squadjsPlugins/squadBaiting
+	url = git@github.com:fantinodavide/squadjs-squad-baiting.git
