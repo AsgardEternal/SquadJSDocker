@@ -13,4 +13,4 @@
 	url = https://github.com/fantinodavide/squadjs-switch-plugin.git
 [submodule "squadjsPlugins/squadBaiting"]
 	path = squadjsPlugins/squadBaiting
-	url = git@github.com:fantinodavide/squadjs-squad-baiting.git
+	url = https://github.com/fantinodavide/squadjs-squad-baiting.git
